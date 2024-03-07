@@ -1,0 +1,28 @@
+Pour docker file on peut prendre l'image latest mongodb
+Et pour la communication faudra faire un statefulset de mongo et le lié aux services
+Pour aller sur le site dans kub (sous service) faut mettre le nomDuService:port (et non localhost) ou son ip
+
+ArgoCD : https://argo-cd.readthedocs.io/en/stable/getting_started/
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+Mettre en NodePort :
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
+
+MDP Admin ArgoCD :
+commande : argocd admin initial-password -n argocd
+et ensuite le mdp est en base64 faut le decode
+Sur les settings on peut dire quel repo faut vérif
+
+Connecter le repos git à argo :
+Ajouter un repos et lui passer le gitclone (le prof a dit en ssh, je pourrais test en https) et faut donner la clé git pour le ssh à argo
+Si succesful, c'est bon
+
+Ensuite on créer une app argoCD
+Self-Heal pour qu'il se corrige tout seul en cas de changement d'état
+Prune propagation ...
+Il a coché REPLACE
+La source, normalement y aura notre repos git déjà mis
+Le path c'est le dossier des spécifications kubernetes dans le repos git (on l'appelera k8s-manifest) pour les .yml
+
+Pour la destination on met juste un nom random
