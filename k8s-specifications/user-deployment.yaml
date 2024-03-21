@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: vote
-  name: vote
+    app: user
+  name: user
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: vote
+      app: user
   template:
     metadata:
       labels:
-        app: vote
+        app: user
     spec:
       containers:
-      - image: dockersamples/examplevotingapp_vote
-        name: vote
+      - image: necati44/projet-cicd-user:latest
+        name: user
         ports:
-        - containerPort: 80
-          name: vote
+        - containerPort: 3001
+          name: user
