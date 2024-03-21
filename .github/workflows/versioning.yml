@@ -3,7 +3,7 @@ name: Versioning Pipeline
 on:
   push:
     branches:
-      - /^([0-9]{1,2}\.)*[0-9]{1,2}$/ # Ou lorsque la branche suit le format X.X.X
+      - /^([0-9]{1,2}\.)*[0-9]{1,2}$/
 
 jobs:
   build-and-push-image:
