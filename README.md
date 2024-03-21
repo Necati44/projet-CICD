@@ -1,15 +1,63 @@
 # projet-CICD
 
-Pour ArgoCD :<br><br>
-kubectl create namespace argocd<br>
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml<br>
-kubectl patch svc argocd-server -n argocd --type='json' -p '[{"op": "replace", "path": "/spec/type", "value": "NodePort"}]'<br>
-kubectl get all --namespace argocd<br>
-kubectl port-forward svc/argocd-server -n argocd 8080:443<br>
-On ouvre un autre terminal<br>
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}"<br>
-On utilise un décodeur de base64 pour le mot de passe<br>
-On se connecte à https://localhost:8080<br>
-On va dans les settings pour ajouter un repos git<br>
-Une fois fait et que le repos est considéré "succesful" on peut aller créer une app argoCD<br>
-On va dans le menu "Application" et on ajoute son app avec self-heal et replace d'activé, puis on ajoute le repos git, le chemin des manifests yml et le kubernetes par défaut et le nom du namespace sur lequel on veut que tous soit run, j'ai choisi : kubectl create namespace projet-cicd<br>
+## Lancement en local de l'application
+
+### Lancer un conteneur MongoDB
+
+```bash
+docker run -d -p 27017:27017 --name mongo mongo:latest
+```
+
+Cette commande crée un conteneur, une image et un volume pour MongoDB avec la dernière version.
+
+### Lancer le service order
+
+```bash
+cd order-service
+npm install
+npm start
+```
+
+### Lancer le service user
+
+```bash
+cd user-service
+pip install -r requirements.txt
+python app.py
+```
+
+### Lancer le service frontend
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+## ArgoCD
+
+### Configuration initiale
+
+```bash
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl patch svc argocd-server -n argocd --type='json' -p '[{"op": "replace", "path": "/spec/type", "value": "NodePort"}]'
+kubectl get all --namespace argocd
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+### Accéder à l'interface utilisateur d'ArgoCD
+
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode
+```
+
+Connectez-vous à https://localhost:8080 avec le mot de passe obtenu ci-dessus.
+
+### Ajouter un dépôt Git
+
+Dans les paramètres, ajoutez un dépôt Git.
+
+### Créer une application ArgoCD
+
+Dans le menu "Application", ajoutez une nouvelle application avec les options "self-heal" et "replace" activées. Spécifiez le dépôt Git, le chemin des manifests YAML, le cluster Kubernetes par défaut et le namespace où l'application sera déployée. J'ai personnellement créé un namespace nommé projet-cicd.
