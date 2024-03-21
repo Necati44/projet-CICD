@@ -34,6 +34,25 @@ npm install
 npm start
 ```
 
+## Dockerization
+
+Exécuter cette commande pour lancer l'application
+```bash
+docker compose up
+```
+
+### Push des images dans un repos Docker Hub
+```bash
+docker tag <IMAGE_ID> necati44/projet-cicd-user:latest
+docker push necati44/projet-cicd-user:latest
+
+docker tag <IMAGE_ID> necati44/projet-cicd-order:latest
+docker push necati44/projet-cicd-order:latest
+
+docker tag <IMAGE_ID> necati44/projet-cicd-front-end-react:latest
+docker push necati44/projet-cicd-front-end-react:latest
+```
+
 ## ArgoCD
 
 ### Configuration initiale
