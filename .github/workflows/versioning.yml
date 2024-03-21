@@ -31,7 +31,7 @@ jobs:
         push: true
         context: ./front-end-react
         file: ./front-end-react/Dockerfile
-        tags: necati44/projet-cicd-front-end-react:${{ github.ref }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/projet-cicd-front-end-react:${{ github.head_ref }}
 
     - name: Build and Push order-service Docker Image
       uses: docker/build-push-action@v5
@@ -39,7 +39,7 @@ jobs:
         push: true
         context: ./order-service
         file: ./order-service/Dockerfile
-        tags: necati44/projet-cicd-order:${{ github.ref }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/projet-cicd-order:${{ github.head_ref }}
 
     - name: Build and Push user-service Docker Image
       uses: docker/build-push-action@v5
@@ -47,4 +47,5 @@ jobs:
         push: true
         context: ./user-service
         file: ./user-service/Dockerfile
-        tags: necati44/projet-cicd-user:${{ github.ref }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/projet-cicd-user:${{ github.head_ref }}
+
