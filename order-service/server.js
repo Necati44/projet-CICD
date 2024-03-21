@@ -11,5 +11,5 @@ app.get('/order', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Order Service accessible via http://localhost:${port}`);
+  console.log(`Order Service accessible via http://order:${port}`);
 });
