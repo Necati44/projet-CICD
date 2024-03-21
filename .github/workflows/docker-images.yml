@@ -42,8 +42,8 @@ jobs:
           context: ./order-service
           file: ./order-service/Dockerfile
           tags: |
-            necati44/projet-cicd-order-service:latest
-            necati44/projet-cicd-order-service:${{ github.sha }}
+            necati44/projet-cicd-order:latest
+            necati44/projet-cicd-order:${{ github.sha }}
 
       - name: Build and Push user-service Docker Image
         uses: docker/build-push-action@v5
@@ -52,5 +52,5 @@ jobs:
           context: ./user-service
           file: ./user-service/Dockerfile
           tags: |
-            necati44/projet-cicd-user-service:latest
-            necati44/projet-cicd-user-service:${{ github.sha }}
+            necati44/projet-cicd-user:latest
+            necati44/projet-cicd-user:${{ github.sha }}
