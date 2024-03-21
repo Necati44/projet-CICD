@@ -1,0 +1,50 @@
+version: 'latest'
+
+services:
+  user:
+    build: ./user-service
+    volumes:
+     - ./user-service:/usr/local/app
+    ports:
+      - "3001:3001"
+    networks:
+      - front-tier
+      - back-tier
+
+  order:
+    build: ./order-service
+    volumes:
+      - ./order-service:/usr/local/app
+    ports:
+      - "3002:3002"
+    networks:
+      - front-tier
+      - back-tier
+
+  front-end-react:
+    build: ./front-end-react
+    volumes:
+      - ./front-end-react:/usr/local/app
+    ports:
+      - "3000:3000"
+    networks:
+      - front-tier
+
+  db:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    volumes:
+      - "db-data:/var/lib/mongodb/data"
+    networks:
+      - back-tier
+
+volumes:
+  db-data:
+
+networks:
+  front-tier:
+  back-tier:
