@@ -53,6 +53,18 @@ docker tag <IMAGE_ID> necati44/projet-cicd-front-end-react:latest
 docker push necati44/projet-cicd-front-end-react:latest
 ```
 
+## Kubernetes
+
+Pour exécuter les différentes configurations yaml
+```bash
+kubectl create -f k8s-specifications/
+```
+
+Pour supprimer les différentes configurations yaml
+```bash
+kubectl delete -f k8s-specifications/
+```
+
 ## ArgoCD
 
 ### Configuration initiale
