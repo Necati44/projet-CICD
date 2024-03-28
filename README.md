@@ -59,37 +59,37 @@ Deux workflows sont configurés, le premier, "Build and Push Docker Images", qui
 
 ## Kubernetes
 
-Les modifications ont été effectué sur la branche **microapp-deploy**.
+Les manifests pour Kubernetes se trouvent sur un autre repos : https://github.com/Necati44/projet-CICD-kubernetes
 <br>
-Les fichiers de configuration .yaml pour Kubernetes ont été créé dans le dossier **k8s-specifications**.
+Les fichiers de configuration .yaml pour Kubernetes ont été créé dans le dossier **manifests**. Dans install.yaml se trouve toutes les nodes nécessaires à lancer l'application. Et dans le dossier base on peut trouver chacun de ces nodes dans son propre fichier.
 <br>
 <br>
 
-Pour exécuter les différentes configurations yaml
+Pour exécuter la configuration yaml
 ```bash
-kubectl create -f k8s-specifications/
+kubectl create -f https://raw.githubusercontent.com/Necati44/projet-CICD-kubernetes/main/manifests/install.yaml
 ```
 
-Pour supprimer les différentes configurations yaml
+Pour supprimer la configuration yaml
 ```bash
-kubectl delete -f k8s-specifications/
+kubectl delete -f https://raw.githubusercontent.com/Necati44/projet-CICD-kubernetes/main/manifests/install.yaml
 ```
 
 **Bonus:** Créez un secret contenant l'username et le password du service bd :
 ```bash
-kubectl create secret generic db-credentials --from-literal=username=root --from-literal=password=example
+kubectl create secret generic db-credentials --from-literal=username=root --from-literal=password=example --namespace=projet-cicd
 ```
 
 Pour accéder au service front-end-react il faut faire un port-forward
 ```bash
-kubectl port-forward svc/front-end-react 3000:3000
+minikube service -n projet-cicd front-end-react
 ```
 
 Et il faut ensuite en faire de même pour que le front puisse communiquer avec les autres services
 ```bash
-kubectl port-forward svc/db 27017:27017
-kubectl port-forward svc/user 3001:3001
-kubectl port-forward svc/order 3002:3002
+kubectl port-forward svc/db -n projet-cicd 27017:27017
+kubectl port-forward svc/user -n projet-cicd 3001:3001
+kubectl port-forward svc/order -n projet-cicd 3002:3002
 ```
 
 ## ArgoCD
@@ -153,10 +153,7 @@ spec:
 Pour **SOURCE** sélectionnez le dépot Git que vous ajoutez précédemment et la branche **microapp-deploy** avec le chemin où se trouve les fichiers de configurations Kubernetes, donc **k8s-specifications**.
 ![image](https://github.com/Necati44/projet-CICD/assets/78152671/54fc20ce-645f-4d70-89c9-6ed215934713)
 
-Finalement, **DESTINATION** on choisi le cluster Kubernetes par défaut et le namespace Kubernetes où l'application sera déployée. Nous avons choisi un namespace nommé projet-cicd.
-```bash
-kubectl create namespace projet-cicd
-```
+Finalement, **DESTINATION** on choisi le cluster Kubernetes par défaut et le namespace Kubernetes où l'application sera déployée. Et pour le namespace le notre s'appelle projet-cicd.
 ![image](https://github.com/Necati44/projet-CICD/assets/78152671/ebb5f30e-aead-480f-84a4-624f487d832d)
 
 L'application est maintenant prête et se synchronisera d'elle même avec la branche **microapp-deploy**.
