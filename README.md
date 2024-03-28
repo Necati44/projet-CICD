@@ -119,7 +119,7 @@ Si le status de connexion est "Successful", cela signifie que la manipulation a 
 ### Créer une application ArgoCD
 
 Dans le menu "Application", ajoutez une nouvelle application avec les options suivantes: Dans **GENERAL** mettez la **SYNC POLICY** en "Automatic" et cochez "SELF HEAL", puis en dessous de **PRUNE PROPAGATION POLICY** cochez "REPLACE".
-<br>
+<br><br>
 Ou plus simplement, cliquez sur **EDIT AS YAML** et copié/collé cette configuration :
 ```yaml
 apiVersion: argoproj.io/v1alpha1
