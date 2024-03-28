@@ -106,6 +106,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ```
 *ou utiliser un décodeur en ligne: https://www.base64decode.org/*.
 <br>
+<br>
 Connectez-vous à https://localhost:8080 avec le mot de passe obtenu ci-dessus.
 
 ### Ajouter un dépôt Git
