@@ -36,7 +36,7 @@ npm start
 
 ## Dockerization
 
-Exécuter cette commande pour lancer l'application
+Exécutez cette commande pour lancer l'application
 ```bash
 docker compose up
 ```
