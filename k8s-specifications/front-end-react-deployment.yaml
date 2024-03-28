@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: front-end-react
+  name: front-end-react
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front-end-react
+  template:
+    metadata:
+      labels:
+        app: front-end-react
+    spec:
+      containers:
+      - image: necati44/projet-cicd-front-end-react:latest
+        name: front-end-react
+        ports:
+        - containerPort: 3000
+          name: front-end-react
