@@ -63,6 +63,7 @@ Les modifications ont été effectué sur la branche **microapp-deploy**.
 <br>
 Les fichiers de configuration .yaml pour Kubernetes ont été créé dans le dossier **k8s-specifications**.
 <br>
+<br>
 
 Pour exécuter les différentes configurations yaml
 ```bash
@@ -103,7 +104,8 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode
 ```
-*ou utiliser un décodeur en ligne: https://www.base64decode.org/*
+*ou utiliser un décodeur en ligne: https://www.base64decode.org/*.
+<br>
 Connectez-vous à https://localhost:8080 avec le mot de passe obtenu ci-dessus.
 
 ### Ajouter un dépôt Git
