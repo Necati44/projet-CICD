@@ -152,6 +152,8 @@ Finalement, **DESTINATION** on choisi le cluster Kubernetes par défaut et le na
 ```bash
 kubectl create namespace projet-cicd
 ```
+![image](https://github.com/Necati44/projet-CICD/assets/78152671/ebb5f30e-aead-480f-84a4-624f487d832d)
+
 L'application est maintenant prête et se synchronisera d'elle même avec la branche **microapp-deploy**.
 ![image](https://github.com/Necati44/projet-CICD/assets/78152671/f2bc13f6-1bcd-471c-8041-0c08fcdd8cf0)
 
@@ -160,7 +162,7 @@ Pour accéder au service front-end-react il faut faire un port-forward
 ```bash
 kubectl port-forward svc/front-end-react -n projet-cicd 3000:3000
 ```
-ou si le port n'importe pas
+ou si le port sur lequel se trouve le front ne vous importe pas
 ```bash
 minikube service -n projet-cicd front-end-react
 ```
