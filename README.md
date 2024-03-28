@@ -53,7 +53,16 @@ docker tag <IMAGE_ID> necati44/projet-cicd-front-end-react:latest
 docker push necati44/projet-cicd-front-end-react:latest
 ```
 
+## Pipeline CI
+
+Deux workflows sont configurés, le premier, "Build and Push Docker Images", qui permet le build et push des images dockers sur un repos Docker Hub avec comme tag latest et le sha du github, déclenché à partir d'un push sur n'importe quelle branche. Et le second, "Versioning Pipeline", qui est enclenché uniquement lors du push de branche versioning avec comme tag, le nom de la branche. Exemple: 1.0.0
+
 ## Kubernetes
+
+Les modifications ont été effectué sur la branche **microapp-deploy**.
+<br>
+Les fichiers de configuration .yaml pour Kubernetes ont été créé dans le dossier **k8s-specifications**.
+<br>
 
 Pour exécuter les différentes configurations yaml
 ```bash
@@ -63,6 +72,18 @@ kubectl create -f k8s-specifications/
 Pour supprimer les différentes configurations yaml
 ```bash
 kubectl delete -f k8s-specifications/
+```
+
+Pour accéder au service front-end-react il faut faire un port-forward
+```bash
+kubectl port-forward svc/front-end-react 3000:3000
+```
+
+Et il faut ensuite en faire de même pour que le front puisse communiquer avec les autres services
+```bash
+kubectl port-forward svc/db 27017:27017
+kubectl port-forward svc/user 3001:3001
+kubectl port-forward svc/order 3002:3002
 ```
 
 ## ArgoCD
@@ -87,8 +108,8 @@ Connectez-vous à https://localhost:8080 avec le mot de passe obtenu ci-dessus.
 
 ### Ajouter un dépôt Git
 
-Dans les paramètres, ajoutez un dépôt Git.
+Dans les paramètres, ajoutez ce dépôt Git.
 
 ### Créer une application ArgoCD
 
-Dans le menu "Application", ajoutez une nouvelle application avec les options "self-heal" et "replace" activées. Spécifiez le dépôt Git, le chemin des manifests YAML, le cluster Kubernetes par défaut et le namespace où l'application sera déployée. J'ai personnellement créé un namespace nommé projet-cicd.
+Dans le menu "Application", ajoutez une nouvelle application avec les options "self-heal" et "replace" activées. Spécifiez le dépôt Git et la branche **microapp-deploy**, le chemin des manifests YAML, le cluster Kubernetes par défaut et le namespace où l'application sera déployée. J'ai personnellement créé un namespace nommé projet-cicd.
