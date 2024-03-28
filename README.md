@@ -1,5 +1,5 @@
 # projet-CICD
-
+Travail réalisé par Syméon ROUGEVIN-BÂVILLE et Necati ÜNLÜ
 ## Lancement en local de l'application
 
 ### Lancer un conteneur MongoDB
@@ -82,7 +82,7 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode
 ```
-
+*ou utiliser un décodeur en ligne: https://www.base64decode.org/*
 Connectez-vous à https://localhost:8080 avec le mot de passe obtenu ci-dessus.
 
 ### Ajouter un dépôt Git
