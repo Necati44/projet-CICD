@@ -75,6 +75,11 @@ Pour supprimer les différentes configurations yaml
 kubectl delete -f k8s-specifications/
 ```
 
+**Bonus:** Créez un secret contenant l'username et le password du service bd :
+```bash
+kubectl create secret generic db-credentials --from-literal=username=root --from-literal=password=example
+```
+
 Pour accéder au service front-end-react il faut faire un port-forward
 ```bash
 kubectl port-forward svc/front-end-react 3000:3000
@@ -157,6 +162,10 @@ kubectl create namespace projet-cicd
 L'application est maintenant prête et se synchronisera d'elle même avec la branche **microapp-deploy**.
 ![image](https://github.com/Necati44/projet-CICD/assets/78152671/f2bc13f6-1bcd-471c-8041-0c08fcdd8cf0)
 
+**Bonus:** Créez un secret contenant l'username et le password du service bd :
+```bash
+kubectl create secret generic db-credentials --from-literal=username=root --from-literal=password=example --namespace=projet-cicd
+```
 
 Pour accéder au service front-end-react il faut faire un port-forward
 ```bash
