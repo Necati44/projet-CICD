@@ -59,7 +59,7 @@ Deux workflows sont configurés, le premier, "Build and Push Docker Images", qui
 
 ## Kubernetes
 
-Les manifests pour Kubernetes se trouvent sur un autre repos : https://github.com/Necati44/projet-CICD-kubernetes
+Les manifests pour Kubernetes se trouvent sur un autre repos : https://github.com/Necati44/microapp-deploy
 <br>
 Les fichiers de configuration .yaml pour Kubernetes ont été créé dans le dossier **manifests**. Dans install.yaml se trouve toutes les nodes nécessaires à lancer l'application. Et dans le dossier base on peut trouver chacun de ces nodes dans son propre fichier.
 <br>
@@ -67,7 +67,7 @@ Les fichiers de configuration .yaml pour Kubernetes ont été créé dans le dos
 
 Pour exécuter la configuration yaml
 ```bash
-kubectl create -f https://raw.githubusercontent.com/Necati44/projet-CICD-kubernetes/main/manifests/install.yaml
+kubectl create -f https://raw.githubusercontent.com/Necati44/microapp-deploy/main/manifests/install.yaml
 ```
 
 Pour supprimer la configuration yaml
